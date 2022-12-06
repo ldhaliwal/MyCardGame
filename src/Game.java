@@ -57,6 +57,7 @@ public class Game {
     }
 
     public boolean takeTurn(){
+        System.out.println("I love CS!");
         return false;
     }
 
