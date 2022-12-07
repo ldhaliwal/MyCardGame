@@ -7,7 +7,6 @@ public class Deck {
     public Deck(String[] ranks, String[] suits, int[] values) {
         this.cards = new ArrayList<Card>();
 
-
         for(int i = 0; i < ranks.length; i++)
         {
             for(int j = 0; j < suits.length; j++)
@@ -16,7 +15,6 @@ public class Deck {
                 cards.add(c);
             }
         }
-
         this.cardsLeft = cards.size();
     }
 
