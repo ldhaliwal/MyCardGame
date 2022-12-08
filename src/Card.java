@@ -1,3 +1,5 @@
+//Liliana Dhaliwal
+//December 7, 2022
 public class Card {
     private String rank;
     private String suit;

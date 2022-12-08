@@ -1,3 +1,6 @@
+//Liliana Dhaliwal
+//December 7, 2022
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,21 +22,9 @@ public class Game {
         dealerHand = new ArrayList<>();
     }
 
-    public String[] getRanks() {
-        return ranks;
-    }
-
-    public String[] getSuits() {
-        return suits;
-    }
-
-    public int[] getValues() {
-        return values;
-    }
-
     public void playGame() {
         //print instructions
-        System.out.println(printInstructions());
+        printInstructions();
 
         //shuffle the deck
         d.shuffle();
@@ -42,11 +33,13 @@ public class Game {
         playerHand.add(d.deal());
         playerHand.add(d.deal());
 
+        printCards(playerHand);
+
         //deal two cards to the dealer and store in an arraylist called dealerHand
         dealerHand.add(d.deal());
         dealerHand.add(d.deal());
 
-        printWinner(dealerTurn(), playerTurn());
+        printWinner(playerTurn(), dealerTurn());
     }
 
     public int playerTurn(){
@@ -54,9 +47,11 @@ public class Game {
         int playerValue = playerPoints();
 
         System.out.println("Your cards total to: " + playerValue);
+        System.out.println();
 
         while(true) {
-            if (playerValue >= 21) {
+            if (playerValue > 21) {
+                System.out.println("Bust!");
                 break;
             }
 
@@ -71,36 +66,58 @@ public class Game {
             else if (response.equals("H")) {
                 playerHand.add(d.deal());
                 playerValue = playerPoints();
+                System.out.println("You drew a " + playerHand.get(playerHand.size() - 1).toString());
+                System.out.println("Your cards total to: " + playerValue);
+                System.out.println();
             }
             else{
                 System.out.println("Invalid input");
             }
         }
+        System.out.println("------------------------------------");
         return playerValue;
     }
 
     public int dealerTurn(){
         int dealerValue = dealerPoints();
+        System.out.println("The dealer's cards total to: " + dealerValue);
+        System.out.println();
 
         while(true){
-            if(dealerValue >= 17){
+            if(dealerValue > 21)
+            {
+                System.out.println("The dealer went over 21, Bust!");
                 break;
             }
+            else if(dealerValue >= 17){
+                System.out.println("The dealer chose to stand");
+                break;
+            }
+
+            System.out.println("The dealer chose to hit");
+            System.out.println();
+
             dealerHand.add(d.deal());
             dealerValue = dealerPoints();
+
+            System.out.println("The dealer drew a " + dealerHand.get(dealerHand.size() - 1).toString());
+            System.out.println("The dealer's cards total to: " + dealerValue);
         }
+        System.out.println("------------------------------------");
         return dealerValue;
     }
 
-
-    public void printWinner(int dealerValue, int playerValue){
-        if ((dealerValue > 21 && playerValue > 21) || (dealerValue == 21 && playerValue == 21)){
+    public void printWinner(int playerValue, int dealerValue){
+        if ((dealerValue > 21 && playerValue > 21) || dealerValue == playerValue){
+            System.out.println();
             System.out.println("You tied with the dealer! Good game!");
         }
-        else if ((21 - dealerValue) < (21 - playerValue)) {
+        else if ((21 - dealerValue) < (21 - playerValue) || (dealerValue <= 21 && playerValue > 21)){
+            System.out.println();
             System.out.println("You lost, better luck next time!");
         }
-        else if ((21 - dealerValue) > (21 - playerValue)){
+        else if ((21 - dealerValue) > (21 - playerValue) || (dealerValue > 21)){
+            System.out.println();
             System.out.println("You win! Good game!");
         }
     }
@@ -125,8 +142,19 @@ public class Game {
         return dealValue;
     }
 
-    public String printInstructions(){
-        return " ";
+    public void printCards(ArrayList<Card> cards)
+    {
+        for(Card c : cards) {
+            System.out.println("You drew a " + c.toString());
+        }
+    }
+
+    public void printInstructions(){
+        System.out.println("Welcome to Blackjack! the objective of the game is to get as");
+        System.out.println("close as you can to 21 points without going over. Each turn, you will have the");
+        System.out.println("choice to 'Stand' and keep the cards you have, or 'Hit' and draw another card.");
+        System.out.println("Good luck!");
+        System.out.println("------------------------------------");
     }
 
     public static void main(String[] args) {
@@ -134,5 +162,3 @@ public class Game {
         game.playGame();
     }
 }
-
-

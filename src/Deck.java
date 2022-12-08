@@ -1,3 +1,5 @@
+//Liliana Dhaliwal
+//December 7, 2022
 import java.util.ArrayList;
 
 public class Deck {
@@ -38,7 +40,7 @@ public class Deck {
     public void shuffle(){
         for(int i = cards.size() - 1; i > 0; i--)
         {
-            int randomIndex = (int) Math.random() * i;
+            int randomIndex = (int) (Math.random() * i);
             Card temp = cards.get(i);
             cards.set(i, cards.get(randomIndex));
             cards.set(randomIndex, temp);
