@@ -89,6 +89,7 @@ public class Game {
                 System.out.println("The dealer went over 21, Bust!");
                 break;
             }
+            //if the dealer's point total to 17 or more, stand
             else if(dealerValue >= 17){
                 System.out.println("The dealer chose to stand");
                 break;
@@ -100,6 +101,7 @@ public class Game {
             dealerHand.add(d.deal());
             dealerValue = dealerPoints();
 
+            //print the dealer's hand
             System.out.println("The dealer drew a " + dealerHand.get(dealerHand.size() - 1).toString());
             System.out.println("The dealer's cards total to: " + dealerValue);
         }
@@ -125,6 +127,7 @@ public class Game {
     public int playerPoints()
     {
         int handValue = 0;
+        //Showing I can use for each loops
         for(Card c : playerHand)
         {
             handValue += c.getPoint();
@@ -135,6 +138,7 @@ public class Game {
     public int dealerPoints()
     {
         int dealValue = 0;
+        //Showing I can use for each loops
         for(Card c : dealerHand)
         {
             dealValue += c.getPoint();
